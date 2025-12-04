@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antonio | SDR RendaPê</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* --- 1. VARIÁVEIS & RESET --- */
+        :root {
+            --primary-dark: #240b36;
+            --primary-light: #4a148c;
+            --accent: #ffffff;
+            --text-light: #f3e5f5;
+            --white: #ffffff;
+            --bg-dark: #1a0524;
+            --section-bg: #2a0e36;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--white);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* --- 2. HEADER & NAV --- */
+        header {
+            background-color: rgba(36, 11, 54, 0.95);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-nav {
+            height: 40px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .nav-links a:hover {
+            color: var(--white);
+        }
+
+        /* Mobile Menu Button */
+        .menu-toggle {
+            display: none;
+            color: var(--white);
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* --- 3. HERO SECTION --- */
+        #hero {
+            padding-top: 140px;
+            padding-bottom: 100px;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-light) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: 0; right: 0; bottom: 0; left: 0;
+            background-image: radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+
+        .hero-text h2 {
+            font-size: 1.5rem;
+            color: var(--white);
+            margin-bottom: 30px;
+            font-weight: 600;
+            opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            max-width: 600px;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--white);
+            color: var(--primary-dark);
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-weight: 800;
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.4);
+        }
+
+        .hero-image-wrapper {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-img {
+            width: 400px;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 10px solid rgba(255,255,255,0.1);
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
+        }
+
+        /* --- 4. SECTIONS GERAL --- */
+        section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--white);
+        }
+
+        /* --- 5. SOBRE (ABOUT) --- */
+        #sobre {
+            background-color: var(--section-bg);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            color: var(--white);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .about-text ul {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .about-text li {
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .about-text li::before {
+            content: '✓';
+            color: var(--white);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        /* --- 6. ESTATÍSTICAS (STATS) --- */
+        #stats {
+            background: linear-gradient(rgba(36, 11, 54, 0.95), rgba(36, 11, 54, 0.95)), url('http://googleusercontent.com/image_collection/image_retrieval/1460743723052445521');
+            background-size: cover;
+            background-attachment: fixed;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .stat-card {
+            padding: 20px;
+        }
+
+        .stat-number {
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--white);
+            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255,255,255,0.8);
+        }
+
+        /* --- 7. METODOLOGIA --- */
+        #metodologia {
+            background-color: var(--bg-dark);
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s;
+            text-align: center;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--white);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .card i {
+            font-size: 3rem;
+            color: var(--white);
+            margin-bottom: 20px;
+        }
+
+        .card h4 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        /* --- 8. RENDAPÊ & MISSÃO --- */
+        #rendape {
+            background-color: var(--section-bg);
+        }
+
+        .rendape-flex {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            flex-direction: row-reverse;
+        }
+
+        .rendape-img {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.05); /* Fundo sutil para o logo */
+            padding: 40px;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .rendape-img img {
+            width: 100%;
+            max-width: 400px; /* Garante que o logo fique grande, mas não estoure */
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 0 20px rgba(255,255,255,0.2));
+        }
+
+        .quote-box {
+            background: linear-gradient(135deg, var(--primary-light), var(--primary-dark));
+            padding: 40px;
+            border-radius: 16px;
+            position: relative;
+            margin-top: 40px;
+            border-left: 6px solid var(--white);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .quote-box p {
+            font-size: 1.2rem;
+            font-weight: 600;
+            font-family: 'Montserrat', sans-serif;
+            color: var(--white);
+        }
+
+        /* --- 9. FOOTER --- */
+        footer {
+            background-color: #0d0214;
+            padding: 60px 0;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .footer-logo {
+            max-width: 200px;
+            margin-bottom: 20px;
+            filter: grayscale(100%) brightness(200%);
+            opacity: 0.8;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .social-links {
+            margin-top: 30px;
+        }
+
+        .social-links a {
+            display: inline-block;
+            margin: 0 10px;
+            font-size: 24px;
+            color: var(--white);
+            opacity: 0.5;
+            transition: opacity 0.3s, transform 0.2s;
+        }
+
+        .social-links a:hover {
+            opacity: 1;
+            transform: translateY(-3px);
+            color: var(--white);
+        }
+
+        /* --- 10. RESPONSIVO --- */
+        @media (max-width: 992px) {
+            .hero-content {
+                flex-direction: column-reverse;
+                text-align: center;
+            }
+            
+            .hero-text h1 {
+                font-size: 3rem;
+            }
+            
+            .hero-text p {
+                margin: 0 auto 40px auto;
+            }
+
+            .about-grid, .rendape-flex {
+                grid-template-columns: 1fr;
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-img {
+                width: 280px;
+                height: 280px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navbar -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#">
+                    <img src="https://i.ibb.co/SXk78GB6/Logo-principal-2.png" alt="RendaPê" class="logo-nav">
+                </a>
+                <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+                <div class="nav-links">
+                    <a href="#sobre">Perfil Profissional</a>
+                    <a href="#experiencia">Trajetória</a>
+                    <a href="#metodologia">Metodologia</a>
+                    <a href="#rendape">RendaPê</a>
+                    <a href="#contato">Contato</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h2>SDR - RendaPê</h2>
+                    <h1>Antonio</h1>
+                    <p>Especialista em orientar investidores para decisões estratégicas, com foco em segurança, simplicidade e rentabilidade real.</p>
+                    <a href="http://wa.me/5511936201775" class="cta-button">Agendar Reunião</a>
+                </div>
+                <div class="hero-image-wrapper">
+                    <img src="https://i.ibb.co/GQX3Shb6/Whats-App-Image-2025-11-27-at-14-15-46-1.jpg" alt="Foto de Antonio" class="hero-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre Section -->
+    <section id="sobre">
+        <div class="container">
+            <h2 class="section-title">Perfil Profissional</h2>
+            <div class="about-grid">
+                <div class="about-text">
+                    <h3>Base Acadêmica e Humana</h3>
+                    <p>Com 38 anos, Antonio construiu uma carreira sólida fundamentada na educação e no desenvolvimento humano. Residente em Osasco, traz em sua bagagem uma formação acadêmica que diferencia sua atuação no mercado.</p>
+                    <p style="margin-top: 15px;">Graduado em <strong>Pedagogia e Letras</strong>, atuou por 4 anos como docente em instituições públicas e privadas de São Paulo. Essa experiência foi fundamental para desenvolver:</p>
+                    <ul>
+                        <li>Comunicação executiva clara e didática.</li>
+                        <li>Escuta ativa voltada para a solução de problemas.</li>
+                        <li>Análise profunda de perfis e necessidades.</li>
+                    </ul>
+                </div>
+                <div class="about-card">
+                    <div style="background: rgba(255,255,255,0.05); padding: 30px; border-radius: 10px; border-left: 4px solid var(--white);">
+                        <p style="font-size: 1.1rem;">"Orientar clientes para decisões inteligentes transcende a venda: é uma ferramenta para gerar progresso concreto e duradouro."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Estatísticas / Experiência Section -->
+    <section id="experiencia" style="padding: 0;">
+        <div id="stats" style="padding: 100px 0;">
+            <div class="container">
+                <h2 class="section-title" style="color: var(--white);">Impacto no Mercado</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">9</div>
+                        <div class="stat-label">Anos de Experiência Comercial</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">11.2k+</div>
+                        <div class="stat-label">Investidores Orientados</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">8.000+</div>
+                        <div class="stat-label">Soluções Estratégicas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Metodologia Section -->
+    <section id="metodologia">
+        <div class="container">
+            <h2 class="section-title">Abordagem Estratégica</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h4>Especilaização Contínua</h4>
+                    <p>Em constante atualização, atualmente cursa Gestão Comercial pela UFBRA (EAD), aliando embasamento teórico à prática de mercado.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-users-viewfinder"></i>
+                    <h4>Consultoria Humanizada</h4>
+                    <p>O processo de vendas é conduzido como uma consultoria, traduzindo necessidades complexas em soluções reais e tangíveis.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-chess-knight"></i>
+                    <h4>Disciplina e Resultado</h4>
+                    <p>Metodologia focada em disciplina e clareza para entregar faturamento consistente e construir parcerias de longo prazo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RendaPê Section -->
+    <section id="rendape">
+        <div class="container">
+            <div class="rendape-flex">
+                <div class="rendape-content" style="flex: 1;">
+                    <h2 class="section-title" style="text-align: left; margin-bottom: 30px;">Atuação na RendaPê</h2>
+                    <p>A RendaPê se destaca por <strong>democratizar o acesso a investimentos imobiliários</strong>, oferecendo segurança, simplicidade e rentabilidade real aos seus parceiros.</p>
+                    <p style="margin-top: 20px;">Como SDR, a missão de Antonio conecta-se diretamente aos valores da corporação: transformar o mercado imobiliário através da transparência e do impacto social positivo.</p>
+                    
+                    <div class="quote-box">
+                        <p>Foco Profissional: Entregar faturamento sólido para a empresa e construir relações comerciais duradouras, baseadas estritamente em confiança e clareza.</p>
+                    </div>
+                </div>
+                <div class="rendape-img" style="flex: 1;">
+                    <!-- Logo RendaPê Grande -->
+                    <img src="https://i.ibb.co/SXk78GB6/Logo-principal-2.png" alt="Logo RendaPê Grande">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer / Contato -->
+    <footer id="contato">
+        <div class="container">
+            <img src="https://i.ibb.co/SXk78GB6/Logo-principal-2.png" alt="RendaPê Logo" class="footer-logo">
+            <h3>Soluções Inteligentes para Investimentos Imobiliários</h3>
+            <p style="margin-top: 10px; color: #aaa;">Equipe RendaPê à disposição para transformar dúvidas em decisões estratégicas.</p>
+            
+            <div class="social-links">
+                <a href="http://wa.me/5511936201775" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            
+            <p style="margin-top: 40px; font-size: 12px; color: #555;">&copy; 2025 Antonio - RendaPê. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            const nav = document.querySelector('.nav-links');
+            if(nav.style.display === 'flex') {
+                nav.style.display = 'none';
+            } else {
+                nav.style.display = 'flex';
+                nav.style.flexDirection = 'column';
+                nav.style.position = 'absolute';
+                nav.style.top = '70px';
+                nav.style.right = '20px';
+                nav.style.backgroundColor = '#240b36';
+                nav.style.padding = '20px';
+                nav.style.borderRadius = '8px';
+                nav.style.boxShadow = '0 5px 15px rgba(0,0,0,0.5)';
+            }
+        });
+    </script>
+</body>
+</html>
